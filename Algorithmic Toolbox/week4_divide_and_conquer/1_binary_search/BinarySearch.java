@@ -3,10 +3,26 @@ import java.util.*;
 
 public class BinarySearch {
 
-    static int binarySearch(int[] a, int x) {
+    static int binarySearch(int[] a, int l, int r ,int x) {
         int left = 0, right = a.length;
         //write your code here
+        if (r >= l) {
+            int mid = l + (r - l) / 2;
 
+            // If the element is present at the
+            // middle itself
+            if (a[mid] == x)
+                return mid;
+
+            // If element is smaller than mid, then
+            // it can only be present in left subarray
+            if (a[mid] > x)
+                return binarySearch(a, l, mid - 1, x);
+
+            // Else the element can only be present
+            // in right subarray
+            return binarySearch(a, mid + 1, r, x);
+        }
         return -1;
     }
 
@@ -27,11 +43,12 @@ public class BinarySearch {
         int m = scanner.nextInt();
         int[] b = new int[m];
         for (int i = 0; i < m; i++) {
-          b[i] = scanner.nextInt();
+            b[i] = scanner.nextInt();
         }
         for (int i = 0; i < m; i++) {
             //replace with the call to binarySearch when implemented
-            System.out.print(linearSearch(a, b[i]) + " ");
+            //System.out.print(linearSearch(a, b[i]) + " ");
+            System.out.println(binarySearch(a, 0, a.length - 1, b[i]) + " ");
         }
     }
     static class FastScanner {

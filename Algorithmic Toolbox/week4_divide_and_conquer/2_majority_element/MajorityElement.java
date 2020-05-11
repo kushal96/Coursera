@@ -9,7 +9,26 @@ public class MajorityElement {
         if (left + 1 == right) {
             return a[left];
         }
-        //write your code here
+        int num = right - left;
+        int majorityIndex = left;
+        int count = 1 ;
+
+        for (int i = left + 1 ;i< right; i++) {
+            if (a[i] == a[majorityIndex]) count++;
+            else {
+                count--;
+            }
+            if (count == 0) {
+                majorityIndex = i;
+                count = 1;
+            }
+        }
+        int finalCount = 0;
+        for (int i = left; i < right; i++) {
+            if (a[i] == a[majorityIndex]) finalCount ++;
+        }
+
+        if (finalCount > num/2) return majorityIndex;
         return -1;
     }
 
